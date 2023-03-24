@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text('Success'),
-              content: Text('You are logged in'),
+              content: Text('You are Xlogged in'),
               actions: <Widget>[
                 TextButton(
                   child: Text('OK'),
