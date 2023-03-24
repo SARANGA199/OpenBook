@@ -152,10 +152,20 @@ class _TestFilePickerState extends State<TestFilePicker> {
                 ),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                child: const Text('Submit'),
-                onPressed: () {},
-              ),
+              Container(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green,
+                    onPrimary: Colors.white,
+                    shadowColor: Colors.transparent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: const Text('Submit'),
+                  onPressed: () {},
+                ),
+              )
             ].toColumn().padding(all: 10),
           ),
         ),
