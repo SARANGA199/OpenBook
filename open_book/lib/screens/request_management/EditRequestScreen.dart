@@ -3,6 +3,7 @@ import 'package:open_book/model/bookRequest.dart';
 import 'package:open_book/repositories/BookRequestRepository.dart';
 import 'package:open_book/screens/request_management/DisplayAllRequestsScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class EditRequestScreen extends StatefulWidget {
   final String id;
@@ -19,6 +20,13 @@ class _EditBookRequestScreenState extends State<EditRequestScreen> {
   late String _author;
   late String _ISBN;
   late String _requesterID;
+
+  @override
+  void initState() {
+    super.initState();
+    // Get the current user's ID and set it as the requester ID
+    _requesterID = FirebaseAuth.instance.currentUser!.uid;
+  }
 
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
@@ -52,7 +60,11 @@ class _EditBookRequestScreenState extends State<EditRequestScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Book Request'),
+        title: Text(
+          'Edit Book Request',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Color(0xFF100360),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -61,9 +73,14 @@ class _EditBookRequestScreenState extends State<EditRequestScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              SizedBox(height: 16),
               TextFormField(
                 initialValue: widget.bookRequest.bookTitle,
-                decoration: InputDecoration(labelText: 'Book Title'),
+                decoration: InputDecoration(
+                  labelText: 'Book Title',
+                  border: OutlineInputBorder(),
+                ),
+                style: TextStyle(fontSize: 16),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a book title';
@@ -74,9 +91,14 @@ class _EditBookRequestScreenState extends State<EditRequestScreen> {
                   _bookTitle = value!;
                 },
               ),
+              SizedBox(height: 16),
               TextFormField(
                 initialValue: widget.bookRequest.author,
-                decoration: InputDecoration(labelText: 'Author'),
+                decoration: InputDecoration(
+                  labelText: 'Author',
+                  border: OutlineInputBorder(),
+                ),
+                style: TextStyle(fontSize: 16),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter an author';
@@ -87,9 +109,14 @@ class _EditBookRequestScreenState extends State<EditRequestScreen> {
                   _author = value!;
                 },
               ),
+              SizedBox(height: 16),
               TextFormField(
                 initialValue: widget.bookRequest.ISBN,
-                decoration: InputDecoration(labelText: 'ISBN'),
+                decoration: InputDecoration(
+                  labelText: 'ISBN',
+                  border: OutlineInputBorder(),
+                ),
+                style: TextStyle(fontSize: 16),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter an ISBN';
@@ -100,22 +127,38 @@ class _EditBookRequestScreenState extends State<EditRequestScreen> {
                   _ISBN = value!;
                 },
               ),
-              TextFormField(
-                initialValue: widget.bookRequest.requesterID,
-                decoration: InputDecoration(labelText: 'Requester ID'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a requester ID';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _requesterID = value!;
-                },
-              ),
+              // SizedBox(height: 16),
+              // TextFormField(
+              //   initialValue: widget.bookRequest.requesterID,
+              //   decoration: InputDecoration(
+              //     labelText: 'Requester ID',
+              //     border: OutlineInputBorder(),
+              //   ),
+              //   style: TextStyle(fontSize: 16),
+              //   validator: (value) {
+              //     if (value == null || value.isEmpty) {
+              //       return 'Please enter a requester ID';
+              //     }
+              //     return null;
+              //   },
+              //   onSaved: (value) {
+              //     _requesterID = value!;
+              //   },
+              // ),
+              SizedBox(height: 32),
               ElevatedButton(
                 onPressed: _submitForm,
-                child: Text('Update Book Request'),
+                child: Text(
+                  'Update Book Request',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xFF100360),
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
               ),
             ],
           ),

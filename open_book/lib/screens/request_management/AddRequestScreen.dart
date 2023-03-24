@@ -3,6 +3,7 @@ import 'package:open_book/repositories/BookRequestRepository.dart';
 import 'package:open_book/screens/request_management/DisplayAllRequestsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AddRequestScreen extends StatefulWidget {
   @override
@@ -15,6 +16,13 @@ class _AddBookRequestScreenState extends State<AddRequestScreen> {
   late String _author;
   late String _ISBN;
   late String _requesterID;
+
+  @override
+  void initState() {
+    super.initState();
+    // Get the current user's ID and set it as the requester ID
+    _requesterID = FirebaseAuth.instance.currentUser!.uid;
+  }
 
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
@@ -123,28 +131,28 @@ class _AddBookRequestScreenState extends State<AddRequestScreen> {
                   _ISBN = value!;
                 },
               ),
-              SizedBox(height: 16),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Requester ID',
-                  labelStyle: TextStyle(
-                    color: Color(0xFF100360),
-                    fontWeight: FontWeight.bold,
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFF100360)),
-                  ),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter a requester ID';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _requesterID = value!;
-                },
-              ),
+              // SizedBox(height: 16),
+              // TextFormField(
+              //   decoration: InputDecoration(
+              //     labelText: 'Requester ID',
+              //     labelStyle: TextStyle(
+              //       color: Color(0xFF100360),
+              //       fontWeight: FontWeight.bold,
+              //     ),
+              //     focusedBorder: UnderlineInputBorder(
+              //       borderSide: BorderSide(color: Color(0xFF100360)),
+              //     ),
+              //   ),
+              //   validator: (value) {
+              //     if (value!.isEmpty) {
+              //       return 'Please enter a requester ID';
+              //     }
+              //     return null;
+              //   },
+              //   onSaved: (value) {
+              //     _requesterID = value!;
+              //   },
+              // ),
               SizedBox(height: 32),
               ElevatedButton(
                 onPressed: _submitForm,
