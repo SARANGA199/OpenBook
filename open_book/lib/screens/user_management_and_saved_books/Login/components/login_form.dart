@@ -52,7 +52,7 @@ class _LoginFormState extends State<LoginForm> {
           },
         );
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => UserDetailsScreen()));
+            MaterialPageRoute(builder: (context) => UserProfileScreen()));
       }
     } on FirebaseAuthException catch (e) {
       showDialog(

@@ -19,6 +19,13 @@ class UserRepository {
             snapshot.docs.first.data() as Map<String, dynamic>));
   }
 
+  //Get one user
+  Future<UserAccount> getUserDatabyUid(String uid) async {
+    final record = await _collection.where('uid', isEqualTo: uid).get();
+    final data = record.docs.map((e) => UserAccount.fromFirestore(e)).single;
+    return data;
+  }
+
 //add user
   Future<void> addUser(UserAccount user) {
     return _collection.add(user.toMap());

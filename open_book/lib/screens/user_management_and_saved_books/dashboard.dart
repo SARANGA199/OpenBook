@@ -36,7 +36,7 @@ class Dashboard extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => UserDetailsScreen()),
+                        builder: (context) => UserProfileScreen()),
                   );
                 },
                 child: Text('Add New Recipe'),
@@ -50,7 +50,7 @@ class Dashboard extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => UserDetailsScreen()),
+                        builder: (context) => UserProfileScreen()),
                   );
                 },
                 child: Text('Recipe Recipe List'),

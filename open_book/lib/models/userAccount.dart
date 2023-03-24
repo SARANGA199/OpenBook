@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserAccount {
   String uid;
   String email;
@@ -21,7 +23,18 @@ class UserAccount {
   }
 
   factory UserAccount.fromMap(Map<String, dynamic> data) {
-    return UserAccount(data['email'], data['firstName'], data['lastName'],
-        data['age'], data['mobile'], data['uid']);
+    return UserAccount(data['uid'], data['email'], data['firstName'],
+        data['lastName'], data['age'], data['mobile']);
+  }
+
+  factory UserAccount.fromFirestore(DocumentSnapshot doc) {
+    Map data = doc.data() as Map;
+    return UserAccount(
+        data['uid'],
+        data['email'] ?? '',
+        data['firstName'] ?? '',
+        data['lastName'] ?? '',
+        data['age'] ?? '',
+        data['mobile']);
   }
 }
