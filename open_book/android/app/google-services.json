@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "1068664984586-0tqorod4lf0cbeb9bqa5bkkl8ptn4bou.apps.googleusercontent.com",
+          "client_id": "1068664984586-p3dkiinhfd1jnvlncagu27gvjrcu0dia.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.open_book",
+            "certificate_hash": "a438410650937cea5eda81003a7fd3b3a0ef8c03"
+          }
+        },
+        {
+          "client_id": "1068664984586-hjahjomcm9vk2q4aaveoq45deam2k9el.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -29,6 +37,13 @@
             {
               "client_id": "1068664984586-0tqorod4lf0cbeb9bqa5bkkl8ptn4bou.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1068664984586-9h32qk292r2oi4chrcu8olj7g2m353cl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.openBook"
+              }
             }
           ]
         }
