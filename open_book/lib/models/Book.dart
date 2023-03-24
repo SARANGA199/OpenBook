@@ -24,12 +24,7 @@ class Book {
   }
 
   factory Book.fromMap(Map<String, dynamic> data) {
-    return Book(
-      data['title'],
-      data['author'],
-      data['description'],
-      data['image'],
-      data['bookURL'],
-    );
+    return Book(data['title'], data['author'], data['description'],
+        data['image'], data['bookURL']);
   }
 }
