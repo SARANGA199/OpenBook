@@ -1,5 +1,6 @@
 import 'package:open_book/model/bookRequest.dart';
 import 'package:open_book/repositories/BookRequestRepository.dart';
+import 'package:open_book/screens/request_management/DisplayAllRequestsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -32,6 +33,14 @@ class _AddBookRequestScreenState extends State<AddRequestScreen> {
 
       //clear form
       _formKey.currentState!.reset();
+
+      //navigate to DisplayAllRequestsScreen
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DisplayAllRequestsScreen(),
+        ),
+      );
     }
   }
 
@@ -40,6 +49,7 @@ class _AddBookRequestScreenState extends State<AddRequestScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Add Book Request'),
+        backgroundColor: Color(0xFF100360),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -51,6 +61,13 @@ class _AddBookRequestScreenState extends State<AddRequestScreen> {
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Book Title',
+                  labelStyle: TextStyle(
+                    color: Color(0xFF100360),
+                    fontWeight: FontWeight.bold,
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFF100360)),
+                  ),
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -62,9 +79,17 @@ class _AddBookRequestScreenState extends State<AddRequestScreen> {
                   _bookTitle = value!;
                 },
               ),
+              SizedBox(height: 16),
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Author',
+                  labelStyle: TextStyle(
+                    color: Color(0xFF100360),
+                    fontWeight: FontWeight.bold,
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFF100360)),
+                  ),
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -76,9 +101,17 @@ class _AddBookRequestScreenState extends State<AddRequestScreen> {
                   _author = value!;
                 },
               ),
+              SizedBox(height: 16),
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'ISBN',
+                  labelStyle: TextStyle(
+                    color: Color(0xFF100360),
+                    fontWeight: FontWeight.bold,
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFF100360)),
+                  ),
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -90,9 +123,17 @@ class _AddBookRequestScreenState extends State<AddRequestScreen> {
                   _ISBN = value!;
                 },
               ),
+              SizedBox(height: 16),
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Requester ID',
+                  labelStyle: TextStyle(
+                    color: Color(0xFF100360),
+                    fontWeight: FontWeight.bold,
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFF100360)),
+                  ),
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -104,10 +145,18 @@ class _AddBookRequestScreenState extends State<AddRequestScreen> {
                   _requesterID = value!;
                 },
               ),
-              SizedBox(height: 16),
+              SizedBox(height: 32),
               ElevatedButton(
                 onPressed: _submitForm,
                 child: const Text('Submit'),
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xFF100360),
+                  textStyle: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                ),
               ),
             ],
           ),
