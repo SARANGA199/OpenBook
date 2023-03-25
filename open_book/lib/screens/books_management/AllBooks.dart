@@ -6,6 +6,8 @@ import 'package:image_card/image_card.dart';
 import 'package:open_book/repositories/BookRepository.dart';
 import 'package:open_book/screens/books_management/EditBook.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:open_book/repositories/savedBooksRepository.dart';
+import 'package:open_book/models/savedBooks.dart';
 
 class AllBooks extends StatefulWidget {
   const AllBooks({super.key});
@@ -160,6 +162,25 @@ class _AllBooksState extends State<AllBooks> {
                                         IconButton(
                                           onPressed: () {
                                             // Add save book functionality here
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                content: Text('Saving book...'),
+                                              ),
+                                            );
+
+                                            // save book functionality here (save to firebase)  _save
+                                            SavedBooksRepository
+                                                savedBooksRepository =
+                                                SavedBooksRepository();
+
+                                            SavedBooks savedBooks = SavedBooks(
+                                                data['author'],
+                                                data['image'],
+                                                data['title']);
+
+                                            savedBooksRepository
+                                                .addUser(savedBooks);
                                           },
                                           icon: Icon(Icons.save),
                                           tooltip: 'Save Book',
