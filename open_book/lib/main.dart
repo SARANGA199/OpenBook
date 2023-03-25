@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:open_book/screens/user_management_and_saved_books/LoginScreen.dart';
 import 'firebase_options.dart';
+import 'package:open_book/screens/review_management/reviewDashboard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginScreen(),
+      home: const ReviewDashboard(),
     );
   }
 }
