@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:open_book/screens/request_management/DashboardScreen.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
@@ -38,7 +39,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextButton(
                   child: Text('OK'),
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    //navigate to AddRequestScreen
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DashboardScreen(),
+                      ),
+                    );
                   },
                 ),
               ],
