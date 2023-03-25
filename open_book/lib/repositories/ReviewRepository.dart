@@ -25,8 +25,6 @@ class ReviewRepository {
 
 //delete Review
   Future<void> deleteReview(String id) async {
-   
-
-  void addReview(Review review) {} await _reviewsCollectionReference.doc(id).delete();
+     return _reviewsCollectionReference.doc(id).delete();
   }
 }

@@ -7,9 +7,7 @@ import 'package:open_book/models/Review.dart';
 import 'package:open_book/repositories/ReviewRepository.dart';
 import 'package:open_book/screens/review_management/reviewList.dart';
 import 'package:open_book/screens/user_management_and_saved_books/LoginScreen.dart';
-// import 'package:open_book/screens/dashboard.dart';
-// import 'package:open_book/screens/login.dart';
-// import 'package:open_book/screens/reviewList.dart';
+
 
 class AddReview extends StatefulWidget {
   const AddReview({super.key});
@@ -147,11 +145,6 @@ class _AddReviewState extends State<AddReview> {
                           );
                         },
                       );
-
-                      // setState(() {
-                      //   formKey.currentState!.reset();
-                      //   _birthday = '';
-                      // });
                     } else {
                       //show error message
                       showDialog(
@@ -177,19 +170,7 @@ class _AddReviewState extends State<AddReview> {
                   child: Text('Add Review'),
                 ),
               ),
-              SizedBox(height: 16.0),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    //logout
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()),
-                    );
-                  },
-                  child: Text('Logout'),
-                ),
-              ),
+            
               SizedBox(height: 16.0),
               Center(
                 child: ElevatedButton(

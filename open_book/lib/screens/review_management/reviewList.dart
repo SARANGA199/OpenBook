@@ -31,7 +31,7 @@ class _ReviewListState extends State<ReviewList> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: Color.fromARGB(255, 14, 38, 57),
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('reviews').snapshots(),
@@ -53,58 +53,94 @@ class _ReviewListState extends State<ReviewList> {
               child: CircularProgressIndicator(),
             );
           }
-
           return ListView(
-            children: snapshot.data!.docs.map((DocumentSnapshot document) {
-              Map<String, dynamic> data =
-                  document.data() as Map<String, dynamic>;
-              return Card(
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: ListTile(
-                  title: Text(
-                    data['title'],
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                  subtitle: Text(
-                    data['description'],
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  //add delete button
-                  trailing: IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      //delete student
-                      ReviewRepository reviewRepository = ReviewRepository();
-                      reviewRepository.deleteReview(
-                        document.id,
-                      );
-                    },
-                  ),
-                  //add edit button
-                  leading: IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: () {
-                      //navigate to edit screen
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => UpdateReview(
-                            documentId: document.id,
-                            studentData: data,
-                          ),
-                        ),
-                      );
-                    },
+  children: snapshot.data!.docs.map((DocumentSnapshot document) {
+    Map<String, dynamic> data =
+        document.data() as Map<String, dynamic>;
+    return Card(
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: ListTile(
+        title: Text(
+          data['title'],
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              data['reviewText'],
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                Text(
+                  'Rate: ',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              );
-            }).toList(),
-          );
+                Text(
+                  data['rate'],
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+                SizedBox(width: 16),
+                Text(
+                  'Date: ',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  data['date'],
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        //add delete button
+        trailing: IconButton(
+          icon: Icon(Icons.delete),
+          onPressed: () {
+            //delete student
+            ReviewRepository reviewRepository = ReviewRepository();
+            reviewRepository.deleteReview(
+              document.id,
+            );
+          },
+        ),
+        //add edit button
+        leading: IconButton(
+          icon: Icon(Icons.edit),
+          onPressed: () {
+            //navigate to edit screen
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => UpdateReview(
+                  documentId: document.id,
+                  studentData: data,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }).toList(),
+);
         },
         //add back button
       ),

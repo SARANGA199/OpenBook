@@ -5,10 +5,6 @@ class Review {
   final String date;
 
   Review(this.title, this.reviewText, this.rate, this.date, 
-    // this.title,
-    // this.reviewText,
-    // this.rate,
-    // this.date, 
   );
 
   Map<String, dynamic> toMap() {

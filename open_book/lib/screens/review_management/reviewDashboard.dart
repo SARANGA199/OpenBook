@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:open_book/screens/review_management/AddReview.dart';
 import 'package:open_book/screens/review_management/reviewList.dart';
+import 'package:open_book/screens/user_management_and_saved_books/LoginScreen.dart';
 
 class ReviewDashboard extends StatelessWidget {
 
@@ -19,15 +20,9 @@ class ReviewDashboard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Welcome'),
+            Text('Welcome To Review Management'),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-              },
-              child: const Text('Logout'),
-              //navigate to login screen
-            ),
+       
             const SizedBox(height: 20),
             Center(
               child: ElevatedButton(
@@ -61,9 +56,9 @@ class ReviewDashboard extends StatelessWidget {
                 onPressed: () {
                   FirebaseAuth.instance.signOut();
                 },
-                child: Text('Logout'),
+                child: Text('Back'),
               ),
-            ),
+            )
           ],
         ),
       ),
