@@ -127,24 +127,6 @@ class _EditBookRequestScreenState extends State<EditRequestScreen> {
                   _ISBN = value!;
                 },
               ),
-              // SizedBox(height: 16),
-              // TextFormField(
-              //   initialValue: widget.bookRequest.requesterID,
-              //   decoration: InputDecoration(
-              //     labelText: 'Requester ID',
-              //     border: OutlineInputBorder(),
-              //   ),
-              //   style: TextStyle(fontSize: 16),
-              //   validator: (value) {
-              //     if (value == null || value.isEmpty) {
-              //       return 'Please enter a requester ID';
-              //     }
-              //     return null;
-              //   },
-              //   onSaved: (value) {
-              //     _requesterID = value!;
-              //   },
-              // ),
               SizedBox(height: 32),
               ElevatedButton(
                 onPressed: _submitForm,

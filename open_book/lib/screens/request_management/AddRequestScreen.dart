@@ -131,28 +131,6 @@ class _AddBookRequestScreenState extends State<AddRequestScreen> {
                   _ISBN = value!;
                 },
               ),
-              // SizedBox(height: 16),
-              // TextFormField(
-              //   decoration: InputDecoration(
-              //     labelText: 'Requester ID',
-              //     labelStyle: TextStyle(
-              //       color: Color(0xFF100360),
-              //       fontWeight: FontWeight.bold,
-              //     ),
-              //     focusedBorder: UnderlineInputBorder(
-              //       borderSide: BorderSide(color: Color(0xFF100360)),
-              //     ),
-              //   ),
-              //   validator: (value) {
-              //     if (value!.isEmpty) {
-              //       return 'Please enter a requester ID';
-              //     }
-              //     return null;
-              //   },
-              //   onSaved: (value) {
-              //     _requesterID = value!;
-              //   },
-              // ),
               SizedBox(height: 32),
               ElevatedButton(
                 onPressed: _submitForm,
