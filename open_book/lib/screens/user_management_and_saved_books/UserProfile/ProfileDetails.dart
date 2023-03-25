@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:open_book/screens/user_management_and_saved_books/UserProfile/EditUser.dart';
 import 'package:open_book/screens/user_management_and_saved_books/welcome/welcome_screen.dart';
+import 'package:open_book/screens/user_management_and_saved_books/SavedBooks/SavedBooksList.dart';
 
 class UserProfileScreen extends StatefulWidget {
   @override
@@ -84,7 +85,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         ),
                         SizedBox(height: 5),
                         Text(
-                          'Flutter Developer',
+                          'USER',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.white,
@@ -116,8 +117,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   ),
                   ListTile(
                     leading: Icon(Icons.numbers),
-                    title: Text('Age'),
-                    subtitle: Text('${user.age}'),
+                    title: Text('Country'),
+                    subtitle: Text('${user.country}'),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment
@@ -176,6 +177,41 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         child: Text('Delete Profile'),
                       ),
                     ],
+                  ),
+                  // TextButton(
+                  //   onPressed: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //         builder: (context) => BookList(),
+                  //       ),
+                  //     );
+                  //   },
+                  //   child: Text('My Saved Books'),
+                  // ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BookList(),
+                        ),
+                      );
+                    },
+                    child: Text('My Saved Books'),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BookList(),
+                        ),
+                      );
+                    },
+                    child: Text('Book List'),
                   ),
                 ],
               ),

@@ -5,10 +5,10 @@ class UserAccount {
   String email;
   String firstName;
   String lastName;
-  String age;
+  String country;
   String mobile;
 
-  UserAccount(this.uid, this.email, this.firstName, this.lastName, this.age,
+  UserAccount(this.uid, this.email, this.firstName, this.lastName, this.country,
       this.mobile);
 
   Map<String, dynamic> toMap() {
@@ -17,14 +17,14 @@ class UserAccount {
       'email': email,
       'firstName': firstName,
       'lastName': lastName,
-      'age': age,
+      'country': country,
       'mobile': mobile
     };
   }
 
   factory UserAccount.fromMap(Map<String, dynamic> data) {
     return UserAccount(data['uid'], data['email'], data['firstName'],
-        data['lastName'], data['age'], data['mobile']);
+        data['lastName'], data['country'], data['mobile']);
   }
 
   factory UserAccount.fromFirestore(DocumentSnapshot doc) {
@@ -34,7 +34,7 @@ class UserAccount {
         data['email'] ?? '',
         data['firstName'] ?? '',
         data['lastName'] ?? '',
-        data['age'] ?? '',
+        data['country'] ?? '',
         data['mobile']);
   }
 }

@@ -3,7 +3,7 @@ import 'package:open_book/constants.dart';
 import '../../../components/background.dart';
 import 'components/sign_up_top_image.dart';
 import 'components/signup_form.dart';
-import 'components/socal_sign_up.dart';
+import 'components/google_sign_up.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
