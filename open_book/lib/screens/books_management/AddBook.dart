@@ -183,6 +183,8 @@ class _AddBookState extends State<AddBook> {
                     borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
                   ),
                 ),
+                validator: (value) =>
+                    value!.isEmpty ? 'Title is required' : null,
                 onChanged: (value) {
                   setState(() {
                     _title = value;
@@ -201,6 +203,8 @@ class _AddBookState extends State<AddBook> {
                     borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
                   ),
                 ),
+                validator: (value) =>
+                    value!.isEmpty ? 'Author is required' : null,
                 onChanged: (value) {
                   setState(() {
                     _author = value;
@@ -221,6 +225,8 @@ class _AddBookState extends State<AddBook> {
                     borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
                   ),
                 ),
+                validator: (value) =>
+                    value!.isEmpty ? 'Description is required' : null,
                 onChanged: (value) {
                   setState(() {
                     _description = value;
