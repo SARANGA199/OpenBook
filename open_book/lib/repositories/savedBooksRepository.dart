@@ -3,7 +3,7 @@ import 'package:open_book/models/savedBooks.dart';
 
 class SavedBooksRepository {
   final CollectionReference _collection =
-      FirebaseFirestore.instance.collection('savedBooks');
+      FirebaseFirestore.instance.collection('saved_books');
 
   //get all users
   Stream<List<SavedBooks>> users() {

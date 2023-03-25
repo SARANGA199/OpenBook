@@ -52,8 +52,8 @@ class _LoginFormState extends State<LoginForm> {
             );
           },
         );
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const BookList()));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => UserProfileScreen()));
       }
     } on FirebaseAuthException catch (e) {
       showDialog(

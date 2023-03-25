@@ -19,7 +19,7 @@ class _RecipeListState extends State<BookList> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Book List',
+          'Saved Book List',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -30,7 +30,8 @@ class _RecipeListState extends State<BookList> {
         backgroundColor: Colors.blue,
       ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('savedBooks').snapshots(),
+        stream:
+            FirebaseFirestore.instance.collection('saved_books').snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Center(
