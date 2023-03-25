@@ -1,10 +1,8 @@
-// ignore_for_file: file_names
-
 class BookRequest {
-  String bookTitle; // title of the requested book
-  String author; // author of the requested book
-  String ISBN; // ISBN of the requested book
-  String requesterID; // ID of the person who made the request
+  String bookTitle;
+  String author;
+  String ISBN;
+  String requesterID;
 
   BookRequest(this.bookTitle, this.author, this.ISBN, this.requesterID);
 

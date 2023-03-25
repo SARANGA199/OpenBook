@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:open_book/model/bookRequest.dart';
+import 'package:open_book/models/bookRequest.dart';
 
 class BookRequestRepository {
   final CollectionReference _collection =

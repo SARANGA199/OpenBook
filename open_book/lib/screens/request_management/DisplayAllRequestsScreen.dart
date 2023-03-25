@@ -1,4 +1,4 @@
-import 'package:open_book/model/bookRequest.dart';
+import 'package:open_book/models/bookRequest.dart';
 import 'package:open_book/repositories/BookRequestRepository.dart';
 import 'package:open_book/screens/request_management/EditRequestScreen.dart';
 import 'package:flutter/material.dart';
