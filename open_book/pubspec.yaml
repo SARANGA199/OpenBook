@@ -37,10 +37,15 @@ dependencies:
   firebase_core: ^2.7.1
   firebase_auth: ^4.2.10
   cloud_firestore: ^4.4.4
+  styled_widget: ^0.4.1
+  file_picker: ^5.2.5
+  firebase_storage: ^11.0.15
+  url_launcher: ^6.1.10
+  image_card: ^0.0.4
+
   flutter_svg: ^2.0.3
   google_sign_in: ^6.0.2
   google_fonts: ^4.0.3
-  firebase_storage: ^11.0.16
   animated_theme_switcher: "^2.0.8"
 dev_dependencies:
   flutter_test:
