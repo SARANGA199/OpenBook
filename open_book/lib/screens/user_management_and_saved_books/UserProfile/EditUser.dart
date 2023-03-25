@@ -15,10 +15,10 @@ class EditUser extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<EditUser> createState() => _UpdateRecipeState();
+  State<EditUser> createState() => _UpdateEditUserState();
 }
 
-class _UpdateRecipeState extends State<EditUser> {
+class _UpdateEditUserState extends State<EditUser> {
   final formKey = GlobalKey<FormState>();
   late String _uid = "";
   late String _email = "";
