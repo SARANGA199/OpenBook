@@ -88,79 +88,113 @@ class _AllBooksState extends State<AllBooks> {
               );
             }
 
-            return GridView.count(
-              crossAxisCount: 1,
-              mainAxisSpacing: 16,
-              padding: const EdgeInsetsDirectional.only(
-                start: 36,
-                end: 36,
-                top: 16,
-                bottom: 36,
-              ),
-              children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                Map<String, dynamic> data =
-                    document.data() as Map<String, dynamic>;
-                return Container(
-                  width: 300,
-                  height: 500,
-                  child: Card(
-                    elevation: 4,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        ClipRRect(
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
+            return GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 1,
+                  mainAxisSpacing: 16,
+                ),
+                padding: const EdgeInsetsDirectional.only(
+                  start: 30,
+                  end: 30,
+                ),
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (BuildContext context, int index) {
+                  DocumentSnapshot document = snapshot.data!.docs[index];
+                  Map<String, dynamic> data =
+                      document.data() as Map<String, dynamic>;
+                  return Expanded(
+                    child: Card(
+                      elevation: 4,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              topRight: Radius.circular(16),
+                            ),
+                            child: Image.network(
+                              data['image'],
+                              fit: BoxFit.cover,
+                              height: 150,
+                            ),
                           ),
-                          child: Image.network(
-                            data['image'],
-                            fit: BoxFit.cover,
-                            height: 180,
+                          Padding(
+                            padding: const EdgeInsets.all(2),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      data['title'],
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                          onPressed: () {
+                                            //add toasts messages
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                content:
+                                                    Text('Downloading book...'),
+                                              ),
+                                            );
+                                            // download book functionality here
+                                            launchUrl(data['bookURL']);
+                                          },
+                                          icon: Icon(Icons.download),
+                                          tooltip: 'Download Book',
+                                        ),
+                                        SizedBox(width: 8),
+                                        IconButton(
+                                          onPressed: () {
+                                            // Add save book functionality here
+                                          },
+                                          icon: Icon(Icons.save),
+                                          tooltip: 'Save Book',
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  data['author'],
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  data['description'],
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                data['title'],
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                data['author'],
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                data['description'],
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Expanded(
-                          // wrap the Row widget in an Expanded widget
-                          flex: 1, // set the flex property to 1
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment
-                                .spaceEvenly, // center the buttons
-                            children: [
-                              Container(
-                                child: SizedBox(
+                          SizedBox(height: 8),
+                          Container(
+                            height: 40,
+                            width: double
+                                .infinity, // set width to fill the available space
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  child: SizedBox(
                                     height: 60,
                                     width: 80,
                                     child: Padding(
@@ -177,24 +211,26 @@ class _AllBooksState extends State<AllBooks> {
                                         ),
                                         onPressed: () {
                                           Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      UpdateBook(
-                                                        documentId: document.id,
-                                                        bookData: data,
-                                                      )));
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => UpdateBook(
+                                                documentId: document.id,
+                                                bookData: data,
+                                              ),
+                                            ),
+                                          );
                                         },
                                         child: const Text(
                                           'Edit',
                                           style: TextStyle(fontSize: 16),
                                         ),
                                       ),
-                                    )),
-                              ),
-                              const SizedBox(width: 8),
-                              Container(
-                                child: SizedBox(
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Container(
+                                  child: SizedBox(
                                     height: 60,
                                     width: 80,
                                     child: Padding(
@@ -221,17 +257,17 @@ class _AllBooksState extends State<AllBooks> {
                                           style: TextStyle(fontSize: 16),
                                         ),
                                       ),
-                                    )),
-                              ),
-                            ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              }).toList(),
-            );
+                  );
+                });
           },
         ));
   }

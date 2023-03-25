@@ -160,7 +160,8 @@ class _UpdateBookState extends State<UpdateBook> {
             child: <Widget>[
               //Add title for page
 
-              InsertFile(300, 300, selectFile, 1, pickedFile),
+              InsertFile(
+                  300, 300, selectFile, 1, pickedFile, _imageURL, _pdfURL),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -179,7 +180,8 @@ class _UpdateBookState extends State<UpdateBook> {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  InsertFile(82, 220, selectPDF, 2, pdfFile),
+                  InsertFile(
+                      82, 220, selectPDF, 2, pdfFile, _imageURL, _pdfURL),
                 ],
               ),
               const SizedBox(height: 20),
@@ -299,10 +301,18 @@ class _UpdateBookState extends State<UpdateBook> {
   }
 }
 
-Widget InsertFile(double height, double width, VoidCallback onTap, int type,
-        PlatformFile? PFile) =>
-    <Widget>[
-      if (PFile != null)
+Widget InsertFile(
+  double height,
+  double width,
+  VoidCallback onTap,
+  int type,
+  PlatformFile? PFile,
+  String _imageURL,
+  String _pdfURL,
+) =>
+    Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
         InkWell(
           onTap: onTap,
           child: Container(
@@ -321,103 +331,55 @@ Widget InsertFile(double height, double width, VoidCallback onTap, int type,
             height: height, // set the height to a fixed value
             width: width, // set the width to a fixed value
             child: type == 1
-                ? Image.file(
-                    File(PFile.path!),
-                    fit: BoxFit.cover,
-                  )
-                : Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    height: height,
-                    width: width,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.picture_as_pdf,
-                          size: 50,
-                          color: Colors.grey[500],
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          PFile.name,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                //check PfFile is null or not
+                ? PFile != null
+                    ? Image.file(
+                        File(PFile.path!),
+                        fit: BoxFit.cover,
+                      )
+                    : _imageURL.isNotEmpty
+                        ? Image.network(
+                            _imageURL,
+                            fit: BoxFit.cover,
+                          )
+                        : const SizedBox(height: 10)
+                : type == 2
+                    //check PfFile is null or not
+                    ? PFile != null
+                        ? Icon(
+                            Icons.picture_as_pdf,
+                            size: 50,
                             color: Colors.grey[500],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                          )
+                        : _pdfURL.isNotEmpty
+                            ? Icon(
+                                Icons.picture_as_pdf,
+                                size: 50,
+                                color: Colors.grey[500],
+                              )
+                            : SizedBox(height: 10)
+                    : SizedBox(height: 10),
           ),
         ),
-      if (PFile == null)
-        InkWell(
-          onTap: onTap,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 3),
-                ),
-              ],
-            ),
-            height: height, // set the height to a fixed value
-            width: width, // set the width to a fixed value
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: type == 1
-                  ? [
-                      Icon(
-                        Icons.photo,
-                        size: 50,
-                        color: Colors.grey[500],
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        'Please add the photo',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey[500],
-                        ),
-                      ),
-                    ]
-                  : [
-                      Icon(
-                        Icons.picture_as_pdf,
-                        size: 50,
-                        color: Colors.grey[500],
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        'Please upload a PDF',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey[500],
-                        ),
-                      ),
-                    ],
-            ),
-          ),
-        ),
-    ]
-        .toColumn(mainAxisAlignment: MainAxisAlignment.spaceBetween)
-        .padding(all: 15);
+        // Padding(
+        //   padding: const EdgeInsets.all(15),
+        //   child: Text(
+        //     type == 1
+        //         ? PFile != null
+        //             ? (PFile.path!)
+        //             : _imageURL.isNotEmpty
+        //                 ? _imageURL.split('/').last
+        //                 : ''
+        //         : type == 2
+        //             ? _pdfURL.isNotEmpty
+        //                 ? _pdfURL.split('/').last
+        //                 : ''
+        //             : '',
+        //     style: const TextStyle(
+        //       fontWeight: FontWeight.bold,
+        //       fontSize: 18,
+        //     ),
+        //   ),
+        // ),
+      ],
+    );

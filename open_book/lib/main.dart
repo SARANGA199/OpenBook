@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:open_book/screens/books_management/AddBook.dart';
 import 'package:open_book/screens/books_management/testStyles.dart';
-import 'package:open_book/screens/user_management_and_saved_books/LoginScreen.dart';
 import 'firebase_options.dart';
 
 void main() async {
