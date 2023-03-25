@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:open_book/screens/Home.dart';
+import 'package:open_book/screens/books_management/testStyles.dart';
 import 'package:open_book/screens/request_management/DashboardScreen.dart';
 import 'package:open_book/screens/user_management_and_saved_books/SavedBooks/SavedBooksList.dart';
 import 'package:open_book/screens/user_management_and_saved_books/UserProfile/ProfileDetails.dart';
@@ -55,7 +57,7 @@ class _LoginFormState extends State<LoginForm> {
           },
         );
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => AddBook()));
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
       }
     } on FirebaseAuthException catch (e) {
       showDialog(

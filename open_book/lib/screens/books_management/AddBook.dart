@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -23,6 +24,7 @@ class _AddBookState extends State<AddBook> {
   UploadTask? uploadTask;
   UploadTask? uploadTaskFile;
   PlatformFile? pdfFile;
+  final User? user = FirebaseAuth.instance.currentUser;
 
   final _formKey = GlobalKey<FormState>();
   late String _title;
@@ -104,6 +106,7 @@ class _AddBookState extends State<AddBook> {
         _description,
         _imageURL,
         _pdfURL,
+        user!.uid,
       );
 
       BookRepository bookRepository = BookRepository();

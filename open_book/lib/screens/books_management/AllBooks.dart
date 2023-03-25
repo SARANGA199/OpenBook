@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -17,6 +18,8 @@ class AllBooks extends StatefulWidget {
 }
 
 class _AllBooksState extends State<AllBooks> {
+  final User? user = FirebaseAuth.instance.currentUser;
+
 //create a function to delete a book cl _delete
   void _delete(String id) {
     //confirm the deletion
@@ -82,7 +85,7 @@ class _AllBooksState extends State<AllBooks> {
                 child: Text(
                   'Loading',
                   style: TextStyle(
-                    color: Colors.blue,
+                    color: Color(0xFF031960),
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
@@ -121,7 +124,7 @@ class _AllBooksState extends State<AllBooks> {
                             child: Image.network(
                               data['image'],
                               fit: BoxFit.cover,
-                              height: 150,
+                              height: 160,
                             ),
                           ),
                           Padding(
@@ -214,73 +217,83 @@ class _AllBooksState extends State<AllBooks> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Container(
-                                  child: SizedBox(
-                                    height: 60,
-                                    width: 80,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(bottom: 5),
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Color(0xFF031960),
-                                          foregroundColor: Colors.white,
-                                          shadowColor: Colors.transparent,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => UpdateBook(
-                                                documentId: document.id,
-                                                bookData: data,
-                                              ),
+                                //check if the user id is the same as the user id of the book
+                                if (user!.uid == data['userId'])
+                                  //if true, show the edit and delete buttons
+
+                                  Container(
+                                    child: SizedBox(
+                                      height: 60,
+                                      width: 80,
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 5),
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Color(0xFF031960),
+                                            foregroundColor: Colors.white,
+                                            shadowColor: Colors.transparent,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                             ),
-                                          );
-                                        },
-                                        child: const Text(
-                                          'Edit',
-                                          style: TextStyle(fontSize: 16),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 8),
-                                Container(
-                                  child: SizedBox(
-                                    height: 60,
-                                    width: 80,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(bottom: 5),
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: const Color.fromARGB(
-                                              255, 248, 248, 248),
-                                          onSurface: const Color.fromARGB(
-                                              255, 233, 16, 16),
-                                          foregroundColor: const Color.fromARGB(
-                                              255, 0, 0, 0),
-                                          shadowColor: Colors.transparent,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    UpdateBook(
+                                                  documentId: document.id,
+                                                  bookData: data,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          child: const Text(
+                                            'Edit',
+                                            style: TextStyle(fontSize: 16),
                                           ),
                                         ),
-                                        onPressed: () {
-                                          _delete(document.id);
-                                        },
-                                        child: const Text(
-                                          'Delete',
-                                          style: TextStyle(fontSize: 16),
+                                      ),
+                                    ),
+                                  ),
+                                const SizedBox(width: 8),
+                                if (user!.uid == data['userId'])
+                                  Container(
+                                    child: SizedBox(
+                                      height: 60,
+                                      width: 80,
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 5),
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                const Color.fromARGB(
+                                                    255, 248, 248, 248),
+                                            onSurface: const Color.fromARGB(
+                                                255, 233, 16, 16),
+                                            foregroundColor:
+                                                const Color.fromARGB(
+                                                    255, 0, 0, 0),
+                                            shadowColor: Colors.transparent,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            _delete(document.id);
+                                          },
+                                          child: const Text(
+                                            'Delete',
+                                            style: TextStyle(fontSize: 16),
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
                               ],
                             ),
                           ),
