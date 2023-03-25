@@ -145,18 +145,7 @@ class _ReviewListState extends State<ReviewList> {
         //add back button
       ),
       //add back button
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          //back to register screen
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LoginScreen(),
-            ),
-          );
-        },
-        child: Icon(Icons.arrow_back),
-      ),
+      
     );
   }
 }

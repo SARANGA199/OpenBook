@@ -21,6 +21,7 @@ class ReviewDashboard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('Welcome To Review Management'),
+             Text('Here You can add reviews'),
             const SizedBox(height: 20),
        
             const SizedBox(height: 20),
