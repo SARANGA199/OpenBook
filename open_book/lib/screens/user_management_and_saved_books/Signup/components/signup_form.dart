@@ -19,7 +19,7 @@ class _SignUpFormState extends State<SignUpForm> {
   final formKey = GlobalKey<FormState>();
   late String _firstName;
   late String _lastName;
-  late String _age;
+  late String _country;
   late String _mobile;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -31,43 +31,58 @@ class _SignUpFormState extends State<SignUpForm> {
 
   //register function
   Future<void> _register() async {
-    try {
-      UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-      if (mounted) {
-        //add user to firebase
-        UserAccount user = UserAccount(userCredential.user!.uid,
-            _emailController.text.trim(), _firstName, _lastName, _age, _mobile);
-        UserRepository userRepository = UserRepository();
-        userRepository.addUser(user);
+    if (formKey.currentState!.validate()) {
+      try {
+        UserCredential userCredential =
+            await _auth.createUserWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+        if (mounted) {
+          //add user to firebase
+          UserAccount user = UserAccount(
+              userCredential.user!.uid,
+              _emailController.text.trim(),
+              _firstName,
+              _lastName,
+              _country,
+              _mobile);
+          UserRepository userRepository = UserRepository();
+          userRepository.addUser(user);
+        }
+        //show success message
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('User Registered successfully'),
+          ),
+        );
+        formKey.currentState!.reset();
+      } on FirebaseAuthException catch (e) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text(e.message!),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
       }
-    } on FirebaseAuthException catch (e) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Error'),
-            content: Text(e.message!),
-            actions: <Widget>[
-              TextButton(
-                child: Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: formKey,
       child: Column(
         children: [
           Padding(
@@ -151,14 +166,14 @@ class _SignUpFormState extends State<SignUpForm> {
               cursorColor: kPrimaryColor,
               onChanged: (value) {
                 setState(() {
-                  _age = value;
+                  _country = value;
                 });
               },
               decoration: InputDecoration(
-                hintText: "Age",
+                hintText: "Country",
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(defaultPadding),
-                  child: Icon(Icons.numbers),
+                  child: Icon(Icons.location_city),
                 ),
               ),
             ),

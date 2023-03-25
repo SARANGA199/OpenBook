@@ -24,7 +24,7 @@ class _UpdateEditUserState extends State<EditUser> {
   late String _email = "";
   late String _firstName = "";
   late String _lastName = "";
-  late String _age = "";
+  late String _country = "";
   late String _mobile = "";
 
   void initState() {
@@ -34,7 +34,7 @@ class _UpdateEditUserState extends State<EditUser> {
     _email = widget.userData.email;
     _firstName = widget.userData.firstName;
     _lastName = widget.userData.lastName;
-    _age = widget.userData.age;
+    _country = widget.userData.country;
     _mobile = widget.userData.mobile;
   }
 
@@ -97,6 +97,7 @@ class _UpdateEditUserState extends State<EditUser> {
                   }
                   return null;
                 },
+                enabled: false,
                 initialValue: _email,
                 onChanged: (value) {
                   setState(() {
@@ -129,14 +130,14 @@ class _UpdateEditUserState extends State<EditUser> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please Enter Age';
+                    return 'Please Enter your Country';
                   }
                   return null;
                 },
-                initialValue: _age,
+                initialValue: _country,
                 onChanged: (value) {
                   setState(() {
-                    _age = value;
+                    _country = value;
                   });
                 },
               ),
@@ -152,7 +153,7 @@ class _UpdateEditUserState extends State<EditUser> {
                         _email,
                         _firstName,
                         _lastName,
-                        _age,
+                        _country,
                         _mobile,
                       );
                       UserRepository userRepository = UserRepository();
