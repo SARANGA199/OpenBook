@@ -8,6 +8,8 @@ import 'package:open_book/repositories/BookRepository.dart';
 import 'package:open_book/repositories/savedBooksRepository.dart';
 import 'package:open_book/screens/books_management/EditBook.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:open_book/repositories/savedBooksRepository.dart';
+import 'package:open_book/models/savedBooks.dart';
 
 class AllBooks extends StatefulWidget {
   const AllBooks({super.key});
@@ -182,6 +184,7 @@ class _AllBooksState extends State<AllBooks> {
                                             savedBooksRepository
                                                 .addUser(savedBooks);
 
+
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
                                               const SnackBar(
@@ -189,6 +192,7 @@ class _AllBooksState extends State<AllBooks> {
                                                     'Saved Book Successfully'),
                                               ),
                                             );
+
                                           },
                                           icon: Icon(Icons.save),
                                           tooltip: 'Save Book',
