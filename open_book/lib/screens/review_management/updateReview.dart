@@ -41,6 +41,7 @@ class _UpdateReviewState extends State<UpdateReview> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Update a Review'),
+         backgroundColor: Color.fromARGB(255, 14, 38, 57),
       ),
       body: Form(
         key: formKey,
@@ -155,10 +156,6 @@ class _UpdateReviewState extends State<UpdateReview> {
                         },
                       );
 
-                      // setState(() {
-                      //   formKey.currentState!.reset();
-                      //   _birthday = '';
-                      // });
                     } else {
                       //show error message
                       showDialog(

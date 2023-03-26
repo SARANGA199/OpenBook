@@ -36,6 +36,7 @@ class _AddReviewState extends State<AddReview> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Add Review'),
+         backgroundColor: Color.fromARGB(255, 14, 38, 57),
       ),
       body: Form(
         key: formKey,
@@ -44,9 +45,14 @@ class _AddReviewState extends State<AddReview> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+                Container(
+              height: 110,
+              width: double.infinity,
+              child: Image.asset('../images/book.jpg'),
+            ),
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'title',
+                  labelText: 'Book Title',
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -63,7 +69,7 @@ class _AddReviewState extends State<AddReview> {
               SizedBox(height: 16.0),
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'reviewText',
+                  labelText: 'Review Comment',
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -80,7 +86,7 @@ class _AddReviewState extends State<AddReview> {
               SizedBox(height: 16.0),
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'rate',
+                  labelText: 'Rate (0/5)',
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -97,7 +103,7 @@ class _AddReviewState extends State<AddReview> {
               SizedBox(height: 16.0),
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'date',
+                  labelText: 'Date',
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
