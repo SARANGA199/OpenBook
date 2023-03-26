@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:open_book/screens/books_management/AddBook.dart';
 import 'package:open_book/screens/books_management/testStyles.dart';
 import 'firebase_options.dart';
+import 'package:open_book/screens/review_management/reviewDashboard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
