@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -23,6 +24,7 @@ class _AddBookState extends State<AddBook> {
   UploadTask? uploadTask;
   UploadTask? uploadTaskFile;
   PlatformFile? pdfFile;
+  final User? user = FirebaseAuth.instance.currentUser;
 
   final _formKey = GlobalKey<FormState>();
   late String _title;
@@ -104,6 +106,7 @@ class _AddBookState extends State<AddBook> {
         _description,
         _imageURL,
         _pdfURL,
+        user!.uid,
       );
 
       BookRepository bookRepository = BookRepository();
@@ -117,6 +120,11 @@ class _AddBookState extends State<AddBook> {
         const SnackBar(
           content: Text('Book added successfully'),
         ),
+      );
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const AllBooks()),
       );
     }
   }
@@ -183,6 +191,8 @@ class _AddBookState extends State<AddBook> {
                     borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
                   ),
                 ),
+                validator: (value) =>
+                    value!.isEmpty ? 'Title is required' : null,
                 onChanged: (value) {
                   setState(() {
                     _title = value;
@@ -201,6 +211,8 @@ class _AddBookState extends State<AddBook> {
                     borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
                   ),
                 ),
+                validator: (value) =>
+                    value!.isEmpty ? 'Author is required' : null,
                 onChanged: (value) {
                   setState(() {
                     _author = value;
@@ -221,6 +233,8 @@ class _AddBookState extends State<AddBook> {
                     borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
                   ),
                 ),
+                validator: (value) =>
+                    value!.isEmpty ? 'Description is required' : null,
                 onChanged: (value) {
                   setState(() {
                     _description = value;
@@ -242,7 +256,7 @@ class _AddBookState extends State<AddBook> {
                     ),
                   ),
                   onPressed: _submitForm,
-                  child: Text(
+                  child: const Text(
                     'SUBMIT',
                     style: TextStyle(fontSize: 16),
                   ),
@@ -269,7 +283,7 @@ class _AddBookState extends State<AddBook> {
                       MaterialPageRoute(builder: (context) => AllBooks()),
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     'All Books',
                     style: TextStyle(fontSize: 16),
                   ),

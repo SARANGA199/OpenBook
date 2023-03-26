@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:open_book/screens/Home.dart';
+import 'package:open_book/screens/books_management/testStyles.dart';
+import 'package:open_book/screens/request_management/DashboardScreen.dart';
 import 'package:open_book/screens/user_management_and_saved_books/SavedBooks/SavedBooksList.dart';
 import 'package:open_book/screens/user_management_and_saved_books/UserProfile/ProfileDetails.dart';
 import '../../../../components/already_have_an_account_acheck.dart';
 import '../../../../constants.dart';
+import '../../../books_management/AddBook.dart';
 import '../../Signup/signup_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:open_book/screens/user_management_and_saved_books/dashboard.dart';
@@ -81,6 +85,8 @@ class _LoginFormState extends State<LoginForm> {
             );
           },
         );
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
       }
     }
   }

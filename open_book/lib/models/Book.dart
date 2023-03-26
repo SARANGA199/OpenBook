@@ -4,6 +4,7 @@ class Book {
   final String description;
   final String image;
   final String bookURL;
+  final String userId;
 
   Book(
     this.title,
@@ -11,6 +12,7 @@ class Book {
     this.description,
     this.image,
     this.bookURL,
+    this.userId,
   );
 
   Map<String, dynamic> toMap() {
@@ -20,11 +22,12 @@ class Book {
       'description': description,
       'image': image,
       'bookURL': bookURL,
+      'userId': userId,
     };
   }
 
   factory Book.fromMap(Map<String, dynamic> data) {
     return Book(data['title'], data['author'], data['description'],
-        data['image'], data['bookURL']);
+        data['image'], data['bookURL'], data['userId']);
   }
 }
