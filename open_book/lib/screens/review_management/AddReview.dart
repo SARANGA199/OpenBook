@@ -8,7 +8,6 @@ import 'package:open_book/repositories/ReviewRepository.dart';
 import 'package:open_book/screens/review_management/reviewList.dart';
 import 'package:open_book/screens/user_management_and_saved_books/LoginScreen.dart';
 
-
 class AddReview extends StatefulWidget {
   const AddReview({super.key});
 
@@ -36,7 +35,7 @@ class _AddReviewState extends State<AddReview> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Add Review'),
-         backgroundColor: Color.fromARGB(255, 14, 38, 57),
+        backgroundColor: Color.fromARGB(255, 14, 38, 57),
       ),
       body: Form(
         key: formKey,
@@ -45,11 +44,11 @@ class _AddReviewState extends State<AddReview> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-                Container(
-              height: 110,
-              width: double.infinity,
-              child: Image.asset('../images/book.jpg'),
-            ),
+              Container(
+                height: 110,
+                width: double.infinity,
+                child: Image.asset('assets/images/review2.jpg'),
+              ),
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Book Title',
@@ -124,13 +123,8 @@ class _AddReviewState extends State<AddReview> {
                     if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
                       //add review to firebase
-                      Review review = Review(
-                         _title,
-                         _reviewText,
-                        _rate,
-                       _date
-                      );
-                      ReviewRepository reviewRepository =ReviewRepository();
+                      Review review = Review(_title, _reviewText, _rate, _date);
+                      ReviewRepository reviewRepository = ReviewRepository();
                       reviewRepository.addReview(review);
 
                       //show success message
@@ -176,7 +170,6 @@ class _AddReviewState extends State<AddReview> {
                   child: Text('Add Review'),
                 ),
               ),
-            
               SizedBox(height: 16.0),
               Center(
                 child: ElevatedButton(

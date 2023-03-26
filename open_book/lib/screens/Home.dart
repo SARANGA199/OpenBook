@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:open_book/screens/books_management/AddBook.dart';
 import 'package:open_book/screens/request_management/DashboardScreen.dart';
+import 'package:open_book/screens/review_management/reviewDashboard.dart';
 import 'package:open_book/screens/user_management_and_saved_books/dashboard.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -77,7 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       // Navigate to the settings screen
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Dashboard()),
+                        MaterialPageRoute(
+                            builder: (context) => ReviewDashboard()),
                       );
                     },
                   ),

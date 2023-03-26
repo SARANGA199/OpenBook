@@ -1,3 +1,4 @@
+import 'package:open_book/screens/books_management/AllBooks.dart';
 import 'package:open_book/screens/request_management/AddRequestScreen.dart';
 import 'package:open_book/screens/request_management/DisplayAllRequestsScreen.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +14,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int _selectedIndex = 0;
   final List<Widget> _screens = [
     DisplayAllRequestsScreen(),
-    DisplayAllRequestsScreen(),
     AddRequestScreen(),
+    AllBooks(),
   ];
   @override
   Widget build(BuildContext context) {

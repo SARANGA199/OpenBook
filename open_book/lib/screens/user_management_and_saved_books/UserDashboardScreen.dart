@@ -1,4 +1,7 @@
+import 'package:open_book/screens/Home.dart';
 import 'package:open_book/screens/books_management/AllBooks.dart';
+import 'package:open_book/screens/books_management/testStyles.dart';
+
 import 'package:open_book/screens/user_management_and_saved_books/SavedBooks/SavedBooksList.dart';
 import 'package:open_book/screens/user_management_and_saved_books/UserProfile/ProfileDetails.dart';
 import 'package:open_book/screens/user_management_and_saved_books/SavedBooks/SavedBooksList.dart';
@@ -15,7 +18,7 @@ class UserDashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<UserDashboardScreen> {
   int _selectedIndex = 0;
   final List<Widget> _screens = [
-    Dashboard(),
+    HomeScreen(),
     UserProfileScreen(),
     AllBooks(),
   ];

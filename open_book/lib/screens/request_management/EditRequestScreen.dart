@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:open_book/models/bookRequest.dart';
 import 'package:open_book/repositories/BookRequestRepository.dart';
 import 'package:open_book/screens/request_management/DisplayAllRequestsScreen.dart';
+import 'package:open_book/screens/request_management/DashboardScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -50,7 +51,7 @@ class _EditBookRequestScreenState extends State<EditRequestScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => DisplayAllRequestsScreen(),
+          builder: (context) => DashboardScreen(),
         ),
       );
     }

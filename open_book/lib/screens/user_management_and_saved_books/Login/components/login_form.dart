@@ -85,8 +85,8 @@ class _LoginFormState extends State<LoginForm> {
             );
           },
         );
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => UserDashboardScreen()));
       }
     }
   }

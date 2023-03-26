@@ -5,9 +5,9 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:open_book/screens/review_management/AddReview.dart';
 import 'package:open_book/screens/review_management/reviewList.dart';
 import 'package:open_book/screens/user_management_and_saved_books/LoginScreen.dart';
+
 // import 'package:open_book/screens/images/rate.png';
 class ReviewDashboard extends StatelessWidget {
-
   const ReviewDashboard({super.key});
 
   @override
@@ -15,17 +15,16 @@ class ReviewDashboard extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Review Dashboard'),
-         backgroundColor: Color.fromARGB(255, 14, 38, 57),
+        backgroundColor: Color.fromARGB(255, 14, 38, 57),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('../images/rate.png'),
+            Image.asset('assets/images/review.png'),
             Text('Welcome To Review Management'),
-             Text('Here You can add reviews'),
+            Text('Here You can add reviews'),
             const SizedBox(height: 20),
-       
             const SizedBox(height: 20),
             Center(
               child: ElevatedButton(
@@ -43,7 +42,6 @@ class ReviewDashboard extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => ReviewList()),
