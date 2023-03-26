@@ -121,6 +121,11 @@ class _AddBookState extends State<AddBook> {
           content: Text('Book added successfully'),
         ),
       );
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const AllBooks()),
+      );
     }
   }
 
@@ -251,7 +256,7 @@ class _AddBookState extends State<AddBook> {
                     ),
                   ),
                   onPressed: _submitForm,
-                  child: Text(
+                  child: const Text(
                     'SUBMIT',
                     style: TextStyle(fontSize: 16),
                   ),
@@ -278,7 +283,7 @@ class _AddBookState extends State<AddBook> {
                       MaterialPageRoute(builder: (context) => AllBooks()),
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     'All Books',
                     style: TextStyle(fontSize: 16),
                   ),
