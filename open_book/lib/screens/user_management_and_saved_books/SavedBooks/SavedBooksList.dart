@@ -27,7 +27,7 @@ class _RecipeListState extends State<BookList> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: Color.fromARGB(255, 18, 0, 117),
       ),
       body: StreamBuilder(
         stream:
@@ -97,9 +97,39 @@ class _RecipeListState extends State<BookList> {
                               alignment: Alignment.centerRight,
                               child: IconButton(
                                 icon: Icon(Icons.delete),
+                                // onPressed: () {
+                                //   SavedBooksRepository()
+                                //       .deleteUser(document.id);
+                                // },
                                 onPressed: () {
-                                  SavedBooksRepository()
-                                      .deleteUser(document.id);
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title:
+                                            Text('Confirm Remove from Saved'),
+                                        content: Text(
+                                            'Are you sure you want to remove this book?'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () {
+                                              // User clicked on "Cancel" button
+                                              Navigator.of(context).pop(false);
+                                            },
+                                            child: Text('Cancel'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              SavedBooksRepository()
+                                                  .deleteUser(document.id);
+                                              Navigator.of(context).pop(false);
+                                            },
+                                            child: Text('Confirm'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
                                 },
                               ),
                             ),

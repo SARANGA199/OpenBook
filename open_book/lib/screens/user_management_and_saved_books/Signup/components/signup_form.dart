@@ -57,6 +57,8 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
         );
         formKey.currentState!.reset();
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => LoginScreen()));
       } on FirebaseAuthException catch (e) {
         showDialog(
           context: context,
@@ -104,6 +106,12 @@ class _SignUpFormState extends State<SignUpForm> {
                   child: Icon(Icons.person),
                 ),
               ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please Enter First Name';
+                }
+                return null;
+              },
             ),
           ),
           TextFormField(
@@ -123,6 +131,12 @@ class _SignUpFormState extends State<SignUpForm> {
                 child: Icon(Icons.person),
               ),
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please Enter Last Name';
+              }
+              return null;
+            },
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: defaultPadding),
@@ -138,6 +152,12 @@ class _SignUpFormState extends State<SignUpForm> {
                   child: Icon(Icons.email),
                 ),
               ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please Enter Email Address';
+                }
+                return null;
+              },
             ),
           ),
           TextFormField(
@@ -157,6 +177,12 @@ class _SignUpFormState extends State<SignUpForm> {
                 child: Icon(Icons.phone),
               ),
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please Enter Mobile Number';
+              }
+              return null;
+            },
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: defaultPadding),
@@ -176,6 +202,12 @@ class _SignUpFormState extends State<SignUpForm> {
                   child: Icon(Icons.location_city),
                 ),
               ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please Enter Country';
+                }
+                return null;
+              },
             ),
           ),
           TextFormField(
@@ -190,6 +222,12 @@ class _SignUpFormState extends State<SignUpForm> {
                 child: Icon(Icons.lock),
               ),
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please Enter Password';
+              }
+              return null;
+            },
           ),
           const SizedBox(height: defaultPadding / 2),
           ElevatedButton(

@@ -43,7 +43,16 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Profile Details'),
+        title: Text(
+          'User Profile Dashboard',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Color.fromARGB(255, 18, 0, 117),
       ),
       body: StreamBuilder<UserAccount>(
         stream: userRepository.user(user?.uid),
@@ -72,7 +81,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         CircleAvatar(
                           radius: 50,
                           backgroundImage: NetworkImage(
-                            'https://picsum.photos/200',
+                            'https://res.cloudinary.com/dlprhahi4/image/upload/v1665683554/610-6104451_image-placeholder-png-user-profile-placeholder-image-png_dy0qvb.jpg',
                           ),
                         ),
                         SizedBox(height: 10),
@@ -121,61 +130,121 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     title: Text('Country'),
                     subtitle: Text('${user.country}'),
                   ),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment
                         .spaceEvenly, // Optional: Centers the buttons horizontally
                     children: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => EditUser(
-                                documentId: DocId,
-                                userData: user,
+                      SizedBox(
+                        width: 130.0, // set the desired width
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditUser(
+                                  documentId: DocId,
+                                  userData: user,
+                                ),
                               ),
+                            );
+                          },
+                          icon: Icon(Icons.edit),
+                          label: Text('Edit Profile'),
+                          style: ElevatedButton.styleFrom(
+                            primary: Color.fromARGB(255, 18, 5,
+                                121), // set the button background color
+                            onPrimary: Colors.white, // set the text color
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  30.0), // set the border radius
                             ),
-                          );
-                        },
-                        child: Text('Update Profile'),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.0,
+                                vertical: 8.0), // set the button padding
+                          ),
+                        ),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text('Confirm Delete your Profile'),
-                                content: Text(
-                                    'Are you sure you want to delete this item?'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    onPressed: () {
-                                      // User clicked on "Cancel" button
-                                      Navigator.of(context).pop(false);
-                                    },
-                                    child: Text('Cancel'),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      UserRepository userRepository =
-                                          UserRepository();
-                                      userRepository.deleteUser(DocId);
-                                      DeleteCredentails();
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  WelcomeScreen()));
-                                    },
-                                    child: Text('Confirm'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                        child: Text('Delete Profile'),
+                      SizedBox(
+                        width: 130.0, // set the desired width
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BookList(),
+                              ),
+                            );
+                          },
+                          icon: Icon(Icons.book),
+                          label: Text('Saved Books'),
+                          style: ElevatedButton.styleFrom(
+                            primary: Color.fromARGB(255, 18, 5,
+                                121), // set the button background color
+                            onPrimary: Colors.white, // set the text color
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  30.0), // set the border radius
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.0,
+                                vertical: 8.0), // set the button padding
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 130.0, // set the desired width
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Confirm Delete your Profile'),
+                                  content: Text(
+                                      'Are you sure you want to delete your account?'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        // User clicked on "Cancel" button
+                                        Navigator.of(context).pop(false);
+                                      },
+                                      child: Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        UserRepository userRepository =
+                                            UserRepository();
+                                        userRepository.deleteUser(DocId);
+                                        DeleteCredentails();
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    WelcomeScreen()));
+                                      },
+                                      child: Text('Confirm'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          icon: Icon(Icons.delete),
+                          label: Text('Delete Profile'),
+                          style: ElevatedButton.styleFrom(
+                            primary: Color.fromARGB(255, 240, 55,
+                                55), // set the button background color
+                            onPrimary: Colors.white, // set the text color
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  30.0), // set the border radius
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.0,
+                                vertical: 8.0), // set the button padding
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -191,29 +260,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   //   child: Text('My Saved Books'),
                   // ),
                   const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BookList(),
-                        ),
-                      );
-                    },
-                    child: Text('My Saved Books'),
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AllBooks(),
-                        ),
-                      );
-                    },
-                    child: Text('Book List'),
-                  ),
+
                 ],
               ),
             );

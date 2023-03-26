@@ -7,6 +7,7 @@ import '../../../../constants.dart';
 import '../../Signup/signup_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:open_book/screens/user_management_and_saved_books/dashboard.dart';
+import 'package:open_book/screens/user_management_and_saved_books/UserDashboardScreen.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({
@@ -18,6 +19,7 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  final formKey = GlobalKey<FormState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   final TextEditingController _emailController = TextEditingController();
@@ -26,21 +28,48 @@ class _LoginFormState extends State<LoginForm> {
   String _errorMessage = '';
 
   Future<void> _login() async {
-    try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
+    if (formKey.currentState!.validate()) {
+      try {
+        UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
 
-      if (mounted) {
-        //show dialog
+        if (mounted) {
+          //show dialog
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Success'),
+                content: Text('You are logged in'),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text('OK'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('User Logged-in successfully'),
+            ),
+          );
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => UserDashboardScreen()));
+        }
+      } on FirebaseAuthException catch (e) {
         showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('Success'),
-              content: Text('You are logged in'),
+              title: Text('Error'),
+              content: Text(e.message ?? ''),
               actions: <Widget>[
                 TextButton(
                   child: Text('OK'),
@@ -52,33 +81,14 @@ class _LoginFormState extends State<LoginForm> {
             );
           },
         );
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => UserProfileScreen()));
       }
-    } on FirebaseAuthException catch (e) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Error'),
-            content: Text(e.message ?? ''),
-            actions: <Widget>[
-              TextButton(
-                child: Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: formKey,
       child: Column(
         children: [
           TextFormField(
@@ -93,6 +103,12 @@ class _LoginFormState extends State<LoginForm> {
                 child: Icon(Icons.person),
               ),
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please Enter Email';
+              }
+              return null;
+            },
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: defaultPadding),
@@ -108,6 +124,12 @@ class _LoginFormState extends State<LoginForm> {
                   child: Icon(Icons.lock),
                 ),
               ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please Enter Password';
+                }
+                return null;
+              },
             ),
           ),
           const SizedBox(height: defaultPadding),
