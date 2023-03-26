@@ -42,7 +42,16 @@ class _UpdateEditUserState extends State<EditUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Update a User'),
+        title: Text(
+          'Update User Profile Details',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Color.fromARGB(255, 18, 0, 117),
       ),
       body: Form(
         key: formKey,
@@ -165,7 +174,7 @@ class _UpdateEditUserState extends State<EditUser> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text('Success'),
-                            content: Text('Recipe Updated successfully.'),
+                            content: Text('User Updated successfully.'),
                             actions: [
                               TextButton(
                                 onPressed: () {
