@@ -67,6 +67,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1068664984586',
     projectId: 'openbook-4155f',
     storageBucket: 'openbook-4155f.appspot.com',
+    androidClientId: '1068664984586-p3dkiinhfd1jnvlncagu27gvjrcu0dia.apps.googleusercontent.com',
     iosClientId: '1068664984586-9h32qk292r2oi4chrcu8olj7g2m353cl.apps.googleusercontent.com',
     iosBundleId: 'com.example.openBook',
   );
@@ -77,6 +78,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1068664984586',
     projectId: 'openbook-4155f',
     storageBucket: 'openbook-4155f.appspot.com',
+    androidClientId: '1068664984586-p3dkiinhfd1jnvlncagu27gvjrcu0dia.apps.googleusercontent.com',
     iosClientId: '1068664984586-9h32qk292r2oi4chrcu8olj7g2m353cl.apps.googleusercontent.com',
     iosBundleId: 'com.example.openBook',
   );
