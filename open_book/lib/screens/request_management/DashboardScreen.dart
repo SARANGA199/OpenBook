@@ -37,8 +37,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
             label: 'Add Request',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.book),
+            label: 'Books',
           ),
         ],
       ),
